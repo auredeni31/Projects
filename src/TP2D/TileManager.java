@@ -32,8 +32,8 @@ public class TileManager {
             e.printStackTrace();
         }
         tiles = new Image[tileSheet.getWidth()/width][tileSheet.getHeight()/height];
-        for(int y=0;y+heigth<tileSheet.getHeight();y=y+height) {
-            for (int x = 0; x +width < tileSheet.getWidth(); x = x + width) {
+        for(int y=1;y+heigth<tileSheet.getHeight();y=y+height+3) {
+            for (int x = 1; x +width < tileSheet.getWidth(); x = x + width+3) {
                 tiles[x / width][y / height] = tileSheet.getSubimage(x, y, width, height);
             }
         }

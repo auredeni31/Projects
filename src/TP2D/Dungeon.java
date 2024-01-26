@@ -96,12 +96,24 @@ public class Dungeon {
         for (int x=0;x<width;x++){
             for (int y=0;y<height;y++){
                 switch (this.map[x][y]){
-                    case ' ' :  renderList.add(new Things(x* tileManager.getWidth(),y* tileManager.getHeigth(), tileManager.getTile(0,2)));
+                    case ' ' :  renderList.add(new Things(x* tileManager.getWidth(),y* tileManager.getHeigth(), tileManager.getTile(1,9)));
                                 break;
                     case 'W' :  renderList.add(new SolidThings(x* tileManager.getWidth(),y* tileManager.getHeigth(), tileManager.getTile(0,0)));
-                                break;
+                        break;
+                    case 'w' :  renderList.add(new SolidThings(x* tileManager.getWidth(),y* tileManager.getHeigth(), tileManager.getTile(1,5)));
+                        break;
+                    case 'L' :  renderList.add(new SolidThings(x* tileManager.getWidth(),y* tileManager.getHeigth(), tileManager.getTile(2,1)));
+                        break;
+                    case 'l' :  renderList.add(new SolidThings(x* tileManager.getWidth(),y* tileManager.getHeigth(), tileManager.getTile(1,13)));
+                        break;
+                    case 'R' :  renderList.add(new SolidThings(x* tileManager.getWidth(),y* tileManager.getHeigth(), tileManager.getTile(2,0)));
+                        break;
+                    case 'r' :  renderList.add(new SolidThings(x* tileManager.getWidth(),y* tileManager.getHeigth(), tileManager.getTile(1,12)));
+                        break;
                     case 'E' :  renderList.add(new SolidThings(x* tileManager.getWidth(),y* tileManager.getHeigth(), tileManager.getTile(0,1)));
-                                break;
+                        break;
+                    case 'A' :  renderList.add(new SolidThings(x* tileManager.getWidth(),y* tileManager.getHeigth(), tileManager.getTile(7,7)));
+                        break;
                 }
             }
         }
