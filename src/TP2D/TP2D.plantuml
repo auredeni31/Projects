@@ -1,0 +1,164 @@
+@startuml
+
+title __Projet Dongeon Crawler, état TP 3 __\n
+
+    namespace TP2D {
+      class TP2D.AnimatedThings {
+          + AnimatedThings()
+          + AnimatedThings()
+          + draw()
+      }
+    }
+
+  
+
+    namespace TP2D {
+      class TP2D.Dungeon {
+          - height : int
+          - map : char[][]
+          - renderList : ArrayList<Things>
+          - width : int
+          + Dungeon()
+          + Dungeon()
+          + Dungeon()
+          + displayDungeonInConsole()
+          + getHeight()
+          + getRenderList()
+          + getWidth()
+          - respawnListOfThings()
+      }
+  }
+  
+
+    namespace TP2D {
+      class TP2D.DynamicThings {
+          + DynamicThings()
+          + DynamicThings()
+          + move()
+          + setImage()
+      }
+    }
+
+
+    namespace TP2D {
+      class TP2D.GameRender {
+          + GameRender()
+          # paintComponent()
+      }
+    }
+
+
+    namespace TP2D {
+      class TP2D.Hero {
+          {static} - instance : Hero
+          - isWalking : boolean
+          + draw()
+          {static} + getInstance()
+          + moveIfPossible()
+          + setOrientation()
+          + setWalking()
+          - Hero()
+      }
+    }
+
+
+    namespace TP2D {
+      class TP2D.HitBox {
+          - height : double
+          - name : String
+          - width : double
+          - x : double
+          - y : double
+          + HitBox()
+          + getX()
+          + getY()
+          + intersect()
+          + move()
+      }
+    }
+
+
+    namespace TP2D {
+      class TP2D.MainInterface {
+          + MainInterface()
+          + keyPressed()
+          + keyReleased()
+          + keyTyped()
+          {static} + main()
+      }
+    }
+
+
+    namespace TP2D {
+      enum Orientation {
+        DOWN
+        LEFT
+        RIGHT
+        UP
+      }
+    }
+
+namespace TP2D {
+      class TP2D.SolidThings {
+          + SolidThings()
+          + SolidThings()
+          + getHitBox()
+      }
+    }
+
+
+    namespace TP2D {
+      class TP2D.Things {
+          # height : int
+          # image : Image
+          # width : int
+          # x : double
+          # y : double
+          + Things()
+          + Things()
+          + draw()
+      }
+    }
+
+
+    namespace TP2D {
+      class TP2D.TileManager {
+          - heigth : int
+          - tileSheet : BufferedImage
+          - tiles : Image[][]
+          - width : int
+          + TileManager()
+          + TileManager()
+          + getHeigth()
+          + getTile()
+          + getWidth()
+          - setTiles()
+      }
+    }
+
+
+  TP2D.AnimatedThings -up-|> TP2D.SolidThings
+  TP2D.Dungeon o-- TP2D.TileManager : tileManager
+  TP2D.DynamicThings -up-|> TP2D.AnimatedThings
+  TP2D.GameRender -up-|> javax.swing.JPanel
+  TP2D.GameRender o-- TP2D.Dungeon : dungeon
+  TP2D.GameRender o-- TP2D.Hero : hero
+  TP2D.Hero -up-|> TP2D.DynamicThings
+  TP2D.Hero o-- TP2D.Orientation : orientation
+  TP2D.MainInterface .up.|> java.awt.event.KeyListener
+  TP2D.MainInterface -up-|> javax.swing.JFrame
+  TP2D.MainInterface o-- TP2D.Dungeon : dungeon
+  TP2D.MainInterface o-- TP2D.Hero : hero
+  TP2D.MainInterface o-- TP2D.GameRender : panel
+  TP2D.MainInterface o-- TP2D.TileManager : tileManager
+  TP2D.SolidThings -up-|> TP2D.Things
+  TP2D.SolidThings o-- TP2D.HitBox : hitBox
+
+
+right footer
+
+
+Antoine Tauvel pour ENSEA
+endfooter
+
+@enduml
