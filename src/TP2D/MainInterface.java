@@ -152,11 +152,11 @@ public class MainInterface extends JFrame implements KeyListener {
     			Clip clip = AudioSystem.getClip();
     			clip.open(audioInput);
     			clip.start();
+    			clip.loop(Clip.LOOP_CONTINUOUSLY);
     		}
     		else {
     			System.out.println("Musique introuvable");
     		}
-    		
     	}
     	catch(Exception e) {
     		e.printStackTrace();
