@@ -53,6 +53,9 @@ public final class Hero extends DynamicThings{
         for (Things things : dungeon.getRenderList()) {
             if (things instanceof SolidThings) {
                 if (((SolidThings) things).getHitBox().intersect(this.getHitBox())) {
+                	if(things instanceof Trap) {
+                		this.takeDamage(10);
+                	}
                     movePossible = false;
                     break;
                 }

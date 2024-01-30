@@ -8,7 +8,8 @@ import java.awt.event.ActionListener;
 public class GameRender extends JPanel {
     private Dungeon dungeon;
     private Hero hero;
-
+    private int framerate;
+    
     public GameRender(Dungeon dungeon, DynamicThings hero) {
         this.dungeon = dungeon;
         this.hero = Hero.getInstance();
@@ -22,5 +23,15 @@ public class GameRender extends JPanel {
             t.draw(g);
         }
         hero.draw(g);
+        framerate++;
     }
+    
+    public int getFramerate(){
+    	return this.framerate;
+    }
+    
+    public void resetFramerate(){
+    	framerate = 0;
+    }
+    
 }

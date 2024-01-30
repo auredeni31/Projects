@@ -1,11 +1,17 @@
 package TP2D;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 public class MainInterface extends JFrame implements KeyListener {
     private TileManager tileManager = new TileManager(48, 48, "./img/tileSet.png");
@@ -14,6 +20,7 @@ public class MainInterface extends JFrame implements KeyListener {
     private GameRender panel = new GameRender(dungeon, hero);
     private StartScreen startScreen;
     private boolean gameOver = false;
+	protected Frame framerate = new Frame("Test");
 
     public MainInterface() throws HeadlessException {
         super();
@@ -62,6 +69,18 @@ public class MainInterface extends JFrame implements KeyListener {
         };
         Timer timer = new Timer(50, animationTimer);
         timer.start();
+        
+        // Marche pas pour l'instant, je me suis inspiré de ca : https://openclassrooms.com/forum/sujet/afficher-le-nombre-de-fps-77567
+        Timer framerate_timer = new Timer(1000, new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                //Affichage des fps
+                framerate.setTitle("FPS actuels : " + panel.getFramerate());
+                //Remise à 0 des fps
+                panel.resetFramerate();
+            }
+        });
+        timer.setRepeats(true);
+        timer.start();
     }
 
     private void initializeKeyListener() {
@@ -75,6 +94,8 @@ public class MainInterface extends JFrame implements KeyListener {
         remove(startScreen);
         add(panel);
         setVisible(true);
+        framerate.setVisible(true);
+        this.playMusic("./sound/musique.wav");
     }
 
     @Override
@@ -123,6 +144,26 @@ public class MainInterface extends JFrame implements KeyListener {
         System.exit(0);
     }
 
+    private void playMusic(String filepath){
+    	try {
+    		File musicPath = new File(filepath);
+    		if (musicPath.exists()) {
+    			AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+    			Clip clip = AudioSystem.getClip();
+    			clip.open(audioInput);
+    			clip.start();
+    		}
+    		else {
+    			System.out.println("Musique introuvable");
+    		}
+    		
+    	}
+    	catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    }
+    
+    
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override

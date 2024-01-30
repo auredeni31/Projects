@@ -112,7 +112,7 @@ public class Dungeon {
                         break;
                     case 'E' :  renderList.add(new SolidThings(x* tileManager.getWidth(),y* tileManager.getHeigth(), tileManager.getTile(0,1)));
                         break;
-                    case 'A' :  renderList.add(new SolidThings(x* tileManager.getWidth(),y* tileManager.getHeigth(), tileManager.getTile(7,7)));
+                    case 'A' :  renderList.add(new Trap(x* tileManager.getWidth(),y* tileManager.getHeigth(), tileManager.getTile(7,7)));
                         break;
                 }
             }
