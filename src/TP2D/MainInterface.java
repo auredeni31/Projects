@@ -20,7 +20,6 @@ public class MainInterface extends JFrame implements KeyListener {
     private GameRender panel = new GameRender(dungeon, hero);
     private StartScreen startScreen;
     private boolean gameOver = false;
-	protected Frame framerate = new Frame("Test");
 
     public MainInterface() throws HeadlessException {
         super();
@@ -65,21 +64,17 @@ public class MainInterface extends JFrame implements KeyListener {
                         displayGameOver();
                     }
                 }
+                Timer fpsTimer = new Timer(1000, new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        double averageFPS = panel.getFramerate();
+                        setTitle("Game - Average FPS: " + averageFPS);
+                    }
+                });
+                fpsTimer.start();
             }
         };
         Timer timer = new Timer(50, animationTimer);
-        timer.start();
-        
-        // Marche pas pour l'instant, je me suis inspiré de ca : https://openclassrooms.com/forum/sujet/afficher-le-nombre-de-fps-77567
-        Timer framerate_timer = new Timer(1000, new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                //Affichage des fps
-                framerate.setTitle("FPS actuels : " + panel.getFramerate());
-                //Remise à 0 des fps
-                panel.resetFramerate();
-            }
-        });
-        timer.setRepeats(true);
         timer.start();
     }
 
@@ -94,7 +89,6 @@ public class MainInterface extends JFrame implements KeyListener {
         remove(startScreen);
         add(panel);
         setVisible(true);
-        framerate.setVisible(true);
         this.playMusic("./sound/musique.wav");
     }
 
